@@ -1,0 +1,134 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// create a Node class
+class Node
+{
+public:
+    int data;
+    Node* next;
+};
+
+// create linked list class with constructor
+class LinkedList
+{
+public:
+    // create a head node
+    Node* head;
+    // create a LinkedList constructor so that it will initialize head:
+    LinkedList()
+    {
+        head=NULL;
+    };
+    // create a CreateNewNode function that will return a Node:
+    Node* CreateNewNode(int value)
+    {
+        // create a node and allocate memory
+        Node* newNode = new Node();
+        // assign data into the newNode
+        newNode->data=value;
+        newNode->next=NULL;
+        return newNode;
+    };
+    void InsertAtHead(int value)
+    {
+        // create a node
+        Node* newNode = CreateNewNode(value);
+        // check if the head is NULL or not
+        if(head==NULL){
+            head=newNode;
+            return;
+        };
+        newNode->next=head;
+        head=newNode;
+    };
+    void InsertAtTail(int value)
+    {
+      Node* a=head;
+      while(a->next!=NULL)
+      {
+          a=a->next;
+      };
+      Node* newNode=CreateNewNode(value);
+      a->next=newNode;
+    };
+    void Traverse()
+    {
+        Node* a=head;
+        while(a!=NULL)
+        {
+            cout << a->data << " ";
+            a=a->next;
+        }
+    };
+    void DeleteAtHead()
+    {
+        Node* a= head;
+        head=a->next;
+        delete a;
+    };
+    void DeleteAtTail()
+    {
+      Node* a=head;
+      while(a->next->next!=NULL)
+      {
+          a=a->next;
+      };
+      Node* b=a->next;
+      a->next=NULL;
+      delete b;
+    };
+    void GetNindexElement(int index)
+    {
+        Node* a=head;
+        int c=0;
+        while(c<index)
+        {
+            a=a->next;
+            c++;
+        };
+        cout <<"\n" << a->data;
+    };
+    void SearchElement(int value)
+    {
+        Node* a=head;
+        while(a != NULL)
+        {
+            if(a->data==value)
+            {
+                cout << "\n" << "True";
+                return;
+            };
+            a=a->next;
+        };
+        cout << "\n" << "False";
+    }
+};
+
+int main()
+{
+    LinkedList l;
+    l.InsertAtHead(5);
+    l.InsertAtHead(4);
+    l.InsertAtHead(3);
+    l.InsertAtHead(2);
+    l.InsertAtHead(1);
+    l.InsertAtHead(0);
+    l.Traverse();
+    l.DeleteAtHead();
+    cout << "\n";
+    l.Traverse();
+    cout << "\n";
+    l.DeleteAtTail();
+    l.Traverse();
+    l.GetNindexElement(0);
+    l.GetNindexElement(1);
+    l.GetNindexElement(2);
+    l.GetNindexElement(3);
+    l.InsertAtTail(117);
+    cout << "\n";
+    l.Traverse();
+    l.SearchElement(117);
+    l.SearchElement(120);
+    return 0;
+}
